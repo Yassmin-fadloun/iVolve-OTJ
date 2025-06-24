@@ -132,7 +132,7 @@ df -hT /mnt/lvm_volume
 ---
 
 
-All commands are saved in:
+Output:
 - [lvm_commands.txt](lvm_commands.txt)
 
 ---
