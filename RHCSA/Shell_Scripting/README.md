@@ -12,52 +12,55 @@ This lab demonstrates how to create an automated backup process for MySQL databa
 
 ## Procedure
 
-### 1. Create the Backup Directory
+### 1. Install MySQL Server
 
 ```bash
-mkdir -p /root/mysql_backups
+sudo apt update
+sudo apt install mysql-server -y
 ```
 
-### 2. Write the Backup Script
-
-Create a file named `backup_mysql.sh` and add the following content:
+### 3. Create Backup Directory
 
 ```bash
-#!/bin/bash
-BACKUP_DIR=/root/mysql_backups
-DATE=$(date +%F)
-FILENAME="MySQL_backup_$DATE.sql"
-mysqldump -u root -p2023 --all-databases > "$BACKUP_DIR/$FILENAME"
+sudo mkdir -p /root/mysql_backups
 ```
 
-Then make it executable:
+### 4. Write the Backup Script
+
+Create the script:
+
+```bash
+nano backup_mysql.sh
+```
+
+ Save the script in this folder:
+- [backup_mysql.sh](backup_mysql.sh)
+
+Make it executable:
 
 ```bash
 chmod +x backup_mysql.sh
 ```
 
-### 3. Set up the Cron Job
-
-To schedule the script to run every day at 5:00 PM, use the crontab:
+### 6. Set Up Cron Job
 
 ```bash
 crontab -e
 ```
 
-Then add this line:
+Add:
 
 ```
-0 17 * * * /root/mysql_backups/backup_mysql.sh
+0 17 * * * /home/ubuntu/iVolve-OTJ/RHCSA/Shell_Scripting/backup_mysql.sh
 ```
 
-Verify the scheduled job:
+Export the cron config:
+- [cron_job.txt](cron_job.txt)
 
-```bash
-crontab -l
-```
+---
 
-## Included Files
+## Files
 
-- `backup_mysql.sh`: Shell script that runs the MySQL database backup.
-- `cron_job.txt`: Contains the crontab entry used to automate the backup.
+- [backup_mysql.sh](backup_mysql.sh)
+- [cron_job.txt](cron_job.txt)
 

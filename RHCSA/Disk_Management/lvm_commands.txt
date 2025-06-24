@@ -1,41 +1,41 @@
-# 1. List attached disks
-lsblk
+=== lsblk ===
 
-# 2. Partition the 6GB disk 
-sudo fdisk /dev/nvme1n1
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+nvme0n1     259:0    0    8G  0 disk 
+├─nvme0n1p1 259:1    0    7G  0 part /
+nvme1n1     259:5    0    6G  0 disk 
+├─nvme1n1p1 259:6    0    2G  0 part 
+└─nvme1n1p2 259:7    0    3G  0 part 
 
-# Inside fdisk:
-# - n (new partition)
-# - Use +2G for first partition size
-# - n again to create second partition
-# - Use +3G for second partition
+=== fdisk -l /dev/nvme1n1 ===
 
+Disk /dev/nvme1n1: 6 GiB, 6442450944 bytes, 12582912 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Device         Start      End  Sectors  Size Type
+/dev/nvme1n1p1  2048   4196351  4194304    2G Linux filesystem
+/dev/nvme1n1p2 4196352 10487807 6291456    3G Linux filesystem
 
-# 3. Format partitions 
-lsblk
+=== sudo pvcreate ===
 
-# 4. Create physical volumes (PV)
-sudo pvcreate /dev/nvme1n1p1
-sudo pvcreate /dev/nvme1n1p2
+  Physical volume "/dev/nvme1n1p1" successfully created.
+  Physical volume "/dev/nvme1n1p2" successfully created.
 
-# 5. Create a volume group (VG) using the 2GB partition
-sudo vgcreate myvg /dev/nvme1n1p1
+=== sudo vgcreate ===
 
-# 6. Create logical volume (LV)
-sudo lvcreate -L 1.5G -n mylv myvg
+  Volume group "my_vg" successfully created
 
-# 7. Format the logical volume with ext4
-sudo mkfs.ext4 /dev/myvg/mylv
+=== sudo lvcreate ===
 
-# 8. Create a mount point and mount the LV
-sudo mkdir /mnt/mydata
-sudo mount /dev/myvg/mylv /mnt/mydata
+  Logical volume "my_lv" created
 
-# 9. Extend the volume group by adding the 3GB partition
-sudo vgextend myvg /dev/nvme1n1p2
+=== sudo mkfs.ext4 ===
 
-# 10. Extend the logical volume to use the new space
-sudo lvextend -l +100%FREE /dev/myvg/mylv
+mke2fs 1.46.5 (30-Dec-2021)
+Creating filesystem with 393216 4k blocks and 98304 inodes
+...
 
-# 11. Resize the filesystem to reflect the new size
-sudo resize2fs /dev/myvg/mylv
+=== sudo mount ===
+
+Filesystem                     Type  Size  Used Avail Use% Mounted on
+/dev/mapper/my_vg-my_lv        ext4  5.9G  100M  5.5G   2% /mnt/lvm_volume
+
