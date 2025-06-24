@@ -36,7 +36,7 @@ mkdir ~/ansible-lab
 cd ~/ansible-lab
 nano inventory.ini
 ```
-## 5. [Inventory.ini](Inventory.txt)content:
+## 5. [Inventory.ini](Inventory.txt) content:
 ```bash
 [managed]
 managed-node ansible_host=(Private ip) ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_ansible
@@ -49,10 +49,13 @@ ansible -i inventory.ini managed -m ping
 ## Expected output:
 ```bash
 managed-node | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
     "changed": false,
     "ping": "pong"
 }
 ```
 ## Files Included
-- inventory.ini — Ansible inventory file with managed node details
+- [Inventory.ini](Inventory.txt) — Ansible inventory file with managed node details
 
