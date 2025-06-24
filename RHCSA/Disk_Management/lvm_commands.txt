@@ -1,0 +1,41 @@
+# 1. List attached disks
+lsblk
+
+# 2. Partition the 6GB disk 
+sudo fdisk /dev/nvme1n1
+
+# Inside fdisk:
+# - n (new partition)
+# - Use +2G for first partition size
+# - n again to create second partition
+# - Use +3G for second partition
+
+
+# 3. Format partitions 
+lsblk
+
+# 4. Create physical volumes (PV)
+sudo pvcreate /dev/nvme1n1p1
+sudo pvcreate /dev/nvme1n1p2
+
+# 5. Create a volume group (VG) using the 2GB partition
+sudo vgcreate myvg /dev/nvme1n1p1
+
+# 6. Create logical volume (LV)
+sudo lvcreate -L 1.5G -n mylv myvg
+
+# 7. Format the logical volume with ext4
+sudo mkfs.ext4 /dev/myvg/mylv
+
+# 8. Create a mount point and mount the LV
+sudo mkdir /mnt/mydata
+sudo mount /dev/myvg/mylv /mnt/mydata
+
+# 9. Extend the volume group by adding the 3GB partition
+sudo vgextend myvg /dev/nvme1n1p2
+
+# 10. Extend the logical volume to use the new space
+sudo lvextend -l +100%FREE /dev/myvg/mylv
+
+# 11. Resize the filesystem to reflect the new size
+sudo resize2fs /dev/myvg/mylv
