@@ -82,13 +82,6 @@ ansible-playbook -i ~/ansible-lab/inventory.ini install_nginx.yml
 ```bash
 http://<public-ip-of-managed-node>
 ```
-
----
-
-## Files Included
-```bash
-- [install_nginx.yml](install_nginx.txt): Playbook to configure Nginx and deploy a web page.
-```
 ---
 
 ## Output Screenshot
