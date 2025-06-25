@@ -1,0 +1,8 @@
+
+- name: Run roles to install apps
+  hosts: managed
+  become: true
+  roles:
+    - docker
+    - kubectl
+    - jenkins
