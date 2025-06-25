@@ -20,7 +20,7 @@ Use Ansible to configure a web server (Nginx), deploy a customized HTML page, an
 ```bash
 nano install_nginx.yml
 ```
-# 2. [`install_nginx.yml`](install_nginx.txt) content:
+# 2. [install_nginx.yml](install_nginx.txt) content:
 ---
 ```bash
 - name: Configure Web Server
@@ -87,7 +87,7 @@ http://<public-ip-of-managed-node>
 
 ## Files Included
 ```bash
-- [`install_nginx.yml`](./install_nginx.yml): Playbook to configure Nginx and deploy a web page.
+- [install_nginx.yml](install_nginx.txt): Playbook to configure Nginx and deploy a web page.
 ```
 ---
 
