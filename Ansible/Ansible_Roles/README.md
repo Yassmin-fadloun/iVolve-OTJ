@@ -19,7 +19,6 @@ Ansible_Roles/
 │   └── tasks/
 │       └── main.yml
 ├── install_apps.yml
-├── install_apps.txt
 └── README.md
 ```
 
@@ -66,4 +65,4 @@ Ansible_Roles/
 ---
 
 ## Related Files
-- [`install_apps.yml`](install_apps.txt)
+- [`install_apps.yml`](install_apps.yml)
