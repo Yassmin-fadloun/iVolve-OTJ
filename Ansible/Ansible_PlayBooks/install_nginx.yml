@@ -1,28 +1,4 @@
-#  Ansible Playbook : Web Server Configuration
-
-## Objective
-
-Use Ansible to configure a web server (Nginx), deploy a customized HTML page, and verify setup.
-
 ---
-
-## Environment
-
-- **Control Node**: EC2 Instance 1 (Ubuntu)
-- **Managed Node**: EC2 Instance 2 (Ubuntu)
-- **Connection**: SSH with key-based authentication (already set up)
-
----
-
-## Steps and Commands
-
-# 1. Create playbook file
-```bash
-nano install_nginx.yml
-```
-# 2. [`install_nginx.yml`](./install_nginx.yml) content:
----
-```bash
 - name: Configure Web Server
   hosts: managed
   become: true
@@ -69,27 +45,4 @@ nano install_nginx.yml
               <p>Powered by Ansible | Managed by Yassmin Fadloun</p>
           </body>
           </html>
-```
-# 3. Run the playbook
-```bash
-ansible-playbook -i ~/ansible-lab/inventory.ini install_nginx.yml
-```
-# Output:
-![Result](Screenshot 2025-06-25 054906.png)
-# 4. Verify from browser:
-```bash
-http://<public-ip-of-managed-node>
-```
-
----
-
-## Files Included
-```bash
-- [`install_nginx.yml`](./install_nginx.yml): Playbook to configure Nginx and deploy a web page.
-```
----
-
-## Output Screenshot
-
-![Web Result](Screenshot 2025-06-25 070157.png)
 
