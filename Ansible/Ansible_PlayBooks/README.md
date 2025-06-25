@@ -92,6 +92,4 @@ http://<public-ip-of-managed-node>
 ---
 
 ## Output Screenshot
-
-![Web Result](Web Result.png)
-
+![Web Result]( Web Result.png)
