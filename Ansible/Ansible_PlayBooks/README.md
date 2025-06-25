@@ -75,7 +75,9 @@ nano install_nginx.yml
 ansible-playbook -i ~/ansible-lab/inventory.ini install_nginx.yml
 ```
 # Output:
+```bash
 ![Result](Screenshot 2025-06-25 054906.png)
+```
 # 4. Verify from browser:
 ```bash
 http://<public-ip-of-managed-node>
@@ -90,6 +92,6 @@ http://<public-ip-of-managed-node>
 ---
 
 ## Output Screenshot
-
+```bash
 ![Web Result](Screenshot 2025-06-25 070157.png)
-
+```
