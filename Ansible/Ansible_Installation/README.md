@@ -46,7 +46,7 @@ managed-node ansible_host=(Private ip) ansible_user=ubuntu ansible_ssh_private_k
 ansible -i inventory.ini managed -m ping
 ```
 
-## Expected output:
+## Output:
 ```bash
 managed-node | SUCCESS => {
     "ansible_facts": {
