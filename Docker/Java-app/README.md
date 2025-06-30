@@ -40,3 +40,36 @@ curl http://localhost:8080
 ## Part 2: Single-Stage Docker Build (Build Outside Docker)
 
 ### Steps
+1. Build the JAR on the host
+```bash
+ mvn clean package -DskipTests
+```
+2. Create [Dockerfile.single](Dockerfile.single)
+   
+3. Build the Docker image:
+```bash
+docker build -f Dockerfile.single -t springboot-single .
+```
+4. Run the container:
+ ```bash
+docker run -d -p 8080:8080 --name springboot-single-app springboot-single
+```
+5. Test:
+```bash
+curl http://localhost:8080
+```
+```bash
+# Comparison Table
+
+Feature                     Multi-Stage Build   Single-Stage Build
+--------------------------  ------------------  -------------------
+Builds Inside Container     Yes                 No
+Requires Maven on Host      No                  Yes
+Final Image Size            Smaller             Larger
+Source Code in Image        No                  Yes
+Secure for Production       Yes                 No
+```
+### Output:
+
+
+
