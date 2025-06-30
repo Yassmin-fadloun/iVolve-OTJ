@@ -58,8 +58,8 @@ docker run -d -p 8080:8080 --name springboot-single-app springboot-single
 ```bash
 curl http://localhost:8080
 ```
-```bash
 # Comparison Table
+```bash
 
 Feature                     Multi-Stage Build   Single-Stage Build
 --------------------------  ------------------  -------------------
@@ -69,7 +69,7 @@ Final Image Size            Smaller             Larger
 Source Code in Image        No                  Yes
 Secure for Production       Yes                 No
 ```
-### Output:
-
+# Output:
+![Result](result.png)
 
 
